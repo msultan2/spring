@@ -1,4 +1,4 @@
-package demo;
+package dependencyinjectiondemo;
 
 import org.springframework.stereotype.Component;
 
