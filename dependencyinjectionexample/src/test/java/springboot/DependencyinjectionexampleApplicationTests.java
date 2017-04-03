@@ -1,4 +1,4 @@
-package com.mycompany;
+package springboot;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
