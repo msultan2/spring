@@ -1,4 +1,4 @@
-package com.mycompany;
+package springboot;
 
 import com.mycompany.controllers.GreetingController;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan("com.mycompany")
 public class DependencyinjectionexampleApplication {
 
 	public static void main(String[] args) {
