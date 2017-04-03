@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-@Profile("english")
+@Profile({"default","english"})
+//@Profile("default") // to be activated in no conf is found in the application.properties
 public class HelloWorldEnglishImpl implements HelloWorldService{
     @Override
     public String getGreeting() {
