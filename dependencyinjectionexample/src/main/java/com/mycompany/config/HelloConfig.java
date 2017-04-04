@@ -1,29 +1,31 @@
 package com.mycompany.config;
 
-import com.mycompany.services.HelloWorldEnglishImpl;
+import com.mycompany.services.HelloWorldFactory;
 import com.mycompany.services.HelloWorldService;
-import com.mycompany.services.HelloWorldSpanishImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 /**
- * Created by mohamedsultan on 03/04/2017.
+ * Created by jt on 10/27/15.
  */
-
 @Configuration
 public class HelloConfig {
 
     @Bean
-    @Profile({"default","english"})
-    public HelloWorldService helloWorldServiceEnglish(){
-        return new HelloWorldEnglishImpl();
+    public HelloWorldFactory helloWorldFactory(){
+        return new HelloWorldFactory();
     }
 
     @Bean
-    @Profile({"spanish"})
-    public HelloWorldService helloWorldServiceSpanish(){
-        return new HelloWorldSpanishImpl();
+    @Profile("english")
+    public HelloWorldService helloWorldServiceEnglish(HelloWorldFactory factory){
+        return factory.createHelloWorldService("en");
     }
 
+    @Bean
+    @Profile("spanish")
+    public HelloWorldService helloWorldServiceSpanish(HelloWorldFactory factory){
+        return factory.createHelloWorldService("es");
+    }
 }
