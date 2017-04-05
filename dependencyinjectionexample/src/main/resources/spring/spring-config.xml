@@ -4,4 +4,41 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:component-scan base-package="com.mycompany" />
+
+    <bean id="greetingController" class="com.mycompany.controllers.GreetingController">
+        <property name="helloWorldService" ref="helloWorldServiceDefault" />
+        <property name="helloWorldServiceFrench" ref="french" />
+        <property name="helloWorldServiceGerman" ref="helloWorldServiceGermanX" />
+    </bean>
+
+    <bean id="helloWorldFactory" class="com.mycompany.services.HelloWorldFactory" />
+    <bean id="french" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
+        <constructor-arg value="fr"/>
+    </bean>
+
+    <bean id="helloWorldServicePolish" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
+        <constructor-arg value="pl"/>
+    </bean>
+
+    <bean id="helloWorldServiceGermanX" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
+        <constructor-arg value="de"/>
+    </bean>
+
+    <bean id="helloWorldServiceRussian" factory-bean="helloWorldFactory" factory-method="createHelloWorldService">
+        <constructor-arg value="ru"/>
+    </bean>
+
+
+    <beans profile="english">
+        <bean id="helloWorldServiceDefault" factory-bean="helloWorldFactory" factory-method="createHelloWorldService" primary="true">
+            <constructor-arg value="en"/>
+        </bean>
+    </beans>
+
+    <beans profile="spanish">
+        <bean id="helloWorldServiceDefault" factory-bean="helloWorldFactory" factory-method="createHelloWorldService" primary="true">
+            <constructor-arg value="es"/>
+        </bean>
+
+    </beans>
 </beans>
