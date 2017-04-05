@@ -26,9 +26,6 @@
     </beans>
 
     <beans profile="spanish">
-        <bean id="helloWorldServiceDefault" factory-bean="helloWorldFactory" factory-method="createHelloWorldService" primary="true">
-            <constructor-arg value="es"/>
-        </bean>
-
+        <import resource="spanish-hello-world.xml"/>
     </beans>
 </beans>
