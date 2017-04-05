@@ -4,10 +4,7 @@ import com.mycompany.domain.Product;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by mohamedsultan on 05/04/2017.
@@ -74,5 +71,23 @@ public class ProductServiceImpl implements ProductService {
         product5.setImageUrl("http://example.com/product5");
 
         products.put(5, product5);
+    }
+
+    @Override
+    public Product saveOrUpdateProduct(Product product) {
+        if (product != null){
+            if (product.getId() == null){
+                product.setId(getNextKey());
+            }
+            products.put(product.getId(), product);
+
+            return product;
+        } else {
+            throw new RuntimeException("Product Can't be nill");
+        }
+    }
+
+    private Integer getNextKey(){
+        return Collections.max(products.keySet()) + 1;
     }
 }
