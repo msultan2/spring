@@ -66,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product5 = new Product();
         product5.setId(5);
-        product5.setDescription("Product 2");
+        product5.setDescription("Product 5");
         product5.setPrice(new BigDecimal("25.99"));
         product5.setImageUrl("http://example.com/product5");
 
@@ -85,6 +85,11 @@ public class ProductServiceImpl implements ProductService {
         } else {
             throw new RuntimeException("Product Can't be nill");
         }
+    }
+
+    @Override
+    public void dropProductById(Integer id) {
+        products.remove(id);
     }
 
     private Integer getNextKey(){
