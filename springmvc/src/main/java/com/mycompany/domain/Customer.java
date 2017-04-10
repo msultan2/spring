@@ -1,11 +1,26 @@
 package com.mycompany.domain;
 
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Version;
+
 /**
  * Created by mohamedsultan on 06/04/2017.
  */
+
+@Entity
 public class Customer implements DomainObject {
 
+    @Id
+    @GeneratedValue
     private Integer id;
+
+    @Version
+    private Integer version;
+
     private String firstName;
     private String lastName;
     private String email;
@@ -24,6 +39,14 @@ public class Customer implements DomainObject {
     @Override
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public String getFirstName() {
