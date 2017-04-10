@@ -13,12 +13,12 @@ import java.util.List;
  * Created by mohamedsultan on 07/04/2017.
  */
 @Service
-@Profile("jpadoa")
-public class ProductServceJpaDaoImpl implements ProductService{
+@Profile("jpadao")
+public class ProductServiceJpaDaoImpl implements ProductService {
 
-    private EntityManagerFactory emf; //Thread safe while EntityManager is not
+    private EntityManagerFactory emf;
 
-    @PersistenceUnit // Inject entity manager into
+    @PersistenceUnit
     public void setEmf(EntityManagerFactory emf) {
         this.emf = emf;
     }
@@ -26,14 +26,15 @@ public class ProductServceJpaDaoImpl implements ProductService{
     @Override
     public List<Product> listAll() {
         EntityManager em = emf.createEntityManager();
-        return em.createQuery("from Product",Product.class).getResultList();
+
+        return em.createQuery("from Product", Product.class).getResultList();
     }
 
     @Override
     public Product getById(Integer id) {
         EntityManager em = emf.createEntityManager();
 
-        return em.find(Product.class,id);
+        return em.find(Product.class, id);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class ProductServceJpaDaoImpl implements ProductService{
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        Product savedProduct = em.merge(domainObject); // em.persist() saves only the object (not update)
+        Product savedProduct = em.merge(domainObject);
         em.getTransaction().commit();
 
         return savedProduct;
@@ -52,7 +53,8 @@ public class ProductServceJpaDaoImpl implements ProductService{
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        em.remove(em.find(Product.class,id));
+        em.remove(em.find(Product.class, id));
         em.getTransaction().commit();
+
     }
 }
