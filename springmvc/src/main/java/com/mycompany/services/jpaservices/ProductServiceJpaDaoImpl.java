@@ -1,7 +1,7 @@
-package com.mycompany.services;
+package com.mycompany.services.jpaservices;
 
-import com.mycompany.domain.Customer;
 import com.mycompany.domain.Product;
+import com.mycompany.services.ProductService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,11 @@ import javax.persistence.PersistenceUnit;
 import java.util.List;
 
 /**
- * Created by mohamedsultan on 10/04/2017.
+ * Created by mohamedsultan on 07/04/2017.
  */
 @Service
 @Profile({"default","jpadao"})
-public class CustomerServiceJpaDaoImpl implements CustomerService {
+public class ProductServiceJpaDaoImpl implements ProductService {
 
     private EntityManagerFactory emf;
 
@@ -25,26 +25,28 @@ public class CustomerServiceJpaDaoImpl implements CustomerService {
     }
 
     @Override
-    public List<?> listAll() {
+    public List<Product> listAll() {
         EntityManager em = emf.createEntityManager();
 
-        return em.createQuery("from Customer", Customer.class).getResultList();
+        return em.createQuery("from Product", Product.class).getResultList();
     }
 
     @Override
-    public Customer getById(Integer id) {
-        return null;
+    public Product getById(Integer id) {
+        EntityManager em = emf.createEntityManager();
+
+        return em.find(Product.class, id);
     }
 
     @Override
-    public Customer saveOrUpdate(Customer domainObject) {
+    public Product saveOrUpdate(Product domainObject) {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        Customer customer = em.merge(domainObject);
+        Product savedProduct = em.merge(domainObject);
         em.getTransaction().commit();
 
-        return  customer;
+        return savedProduct;
     }
 
     @Override
@@ -52,7 +54,8 @@ public class CustomerServiceJpaDaoImpl implements CustomerService {
         EntityManager em = emf.createEntityManager();
 
         em.getTransaction().begin();
-        em.remove(em.find(Customer.class, id));
+        em.remove(em.find(Product.class, id));
         em.getTransaction().commit();
+
     }
 }

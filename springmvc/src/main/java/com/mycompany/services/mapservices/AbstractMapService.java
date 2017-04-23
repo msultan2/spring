@@ -1,4 +1,4 @@
-package com.mycompany.services;
+package com.mycompany.services.mapservices;
 
 import com.mycompany.domain.DomainObject;
 

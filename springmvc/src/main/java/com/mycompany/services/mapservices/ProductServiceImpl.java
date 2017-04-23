@@ -1,15 +1,12 @@
-package com.mycompany.services;
+package com.mycompany.services.mapservices;
 
+import com.mycompany.domain.DomainObject;
 import com.mycompany.domain.Product;
+import com.mycompany.services.ProductService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashMap;
-
-import com.mycompany.domain.DomainObject;
-
 import java.util.HashMap;
 import java.util.List;
 

@@ -1,7 +1,8 @@
-package com.mycompany.services;
+package com.mycompany.services.mapservices;
 
 import com.mycompany.domain.Customer;
 import com.mycompany.domain.DomainObject;
+import com.mycompany.services.CustomerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
