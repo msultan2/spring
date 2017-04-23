@@ -34,5 +34,18 @@ public class CustomerServiceJpaDaoImplTest {
         assert customers.size() == 3;
 
     }
-    
+
+    @Test
+    public void testSaveWithUser() {
+
+        Customer customer = new Customer();
+        User user = new User();
+        user.setUsername("This is my user name");
+        user.setPassword("MyAwesomePassword");
+        customer.setUser(user);
+
+        Customer savedCustomer = customerService.saveOrUpdate(customer);
+
+        assert savedCustomer.getUser().getId() != null;
+    }
 }

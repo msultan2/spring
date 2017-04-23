@@ -1,11 +1,6 @@
 package com.mycompany.domain;
 
-import org.springframework.boot.autoconfigure.web.ResourceProperties;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 /**
  * Created by mohamedsultan on 06/04/2017.
@@ -15,7 +10,7 @@ import javax.persistence.Version;
 public class Customer implements DomainObject {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Version
@@ -30,6 +25,9 @@ public class Customer implements DomainObject {
     private String city;
     private String state;
     private String zipCode;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    private User user;
 
     @Override
     public Integer getId() {
@@ -119,5 +117,13 @@ public class Customer implements DomainObject {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
